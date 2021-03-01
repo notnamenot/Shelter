@@ -22,12 +22,12 @@ public class Animal {
     @Enumerated(EnumType.STRING)
     private AnimalType animalType;
     private String name;
-    @Transient // no age colimn in db
+    @Transient // no age column in db
     private Integer age;
     private String descr;
     private LocalDate dob;
     private LocalDate inShelterFrom;
-    // TODO divide dob into day/month/year
+    // TODO divide dob into day/month/year , add chip field
 
     public Animal(){}
 
