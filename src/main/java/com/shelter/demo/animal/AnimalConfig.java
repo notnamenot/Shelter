@@ -15,11 +15,11 @@ public class AnimalConfig {
     CommandLineRunner commandLineRunner(AnimalRepository repository) {
         return args -> {
              Animal animal = new Animal(
-                    123L, AnimalType.DOG, "Teo",1,"Goof boy", LocalDate.of(2020, Month.APRIL, 13)
+                    123L, AnimalType.DOG, "Teo","Goof boy", LocalDate.of(2020, Month.APRIL, 13), LocalDate.of(2019, Month.APRIL, 13)
             );
 
             Animal animal2 = new Animal(
-                    AnimalType.DOG, "Demo",2,"Goofy boy", LocalDate.of(2021, Month.MARCH, 14)
+                    AnimalType.DOG, "Demo","Goofy boy", LocalDate.of(2020, Month.MARCH, 14), LocalDate.of(2021, Month.MARCH, 14)
             );
 
             repository.saveAll(

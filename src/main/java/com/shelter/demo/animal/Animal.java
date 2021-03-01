@@ -2,6 +2,7 @@ package com.shelter.demo.animal;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity // for hibernate
 @Table
@@ -21,9 +22,12 @@ public class Animal {
     @Enumerated(EnumType.STRING)
     private AnimalType animalType;
     private String name;
+    @Transient // no age colimn in db
     private Integer age;
     private String descr;
+    private LocalDate dob;
     private LocalDate inShelterFrom;
+    // TODO divide dob into day/month/year
 
     public Animal(){}
 
@@ -31,21 +35,21 @@ public class Animal {
         this.id = id;
     }
 
-    public Animal(Long id, AnimalType animalType, String name, Integer age, String descr, LocalDate inShelterFrom) {
+    public Animal(Long id, AnimalType animalType, String name, String descr, LocalDate inShelterFrom, LocalDate dob) {
         this.id = id;
         this.animalType = animalType;
         this.name = name;
-        this.age = age;
+        this.dob = dob;
         this.descr = descr;
         this.inShelterFrom = inShelterFrom;
     }
 
-    public Animal(AnimalType animalType, String name, Integer age, String descr, LocalDate inShelterFrom) {
+    public Animal(AnimalType animalType, String name, String descr, LocalDate inShelterFrom, LocalDate dob) {
         this.animalType = animalType;
         this.name = name;
-        this.age = age;
         this.descr = descr;
         this.inShelterFrom = inShelterFrom;
+        this.dob = dob;
     }
 
     public Long getId() {
@@ -65,7 +69,7 @@ public class Animal {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob, LocalDate.now()).getYears(); // TODO if < 1 year retuern months
     }
 
     public void setAge(Integer age) {
@@ -96,6 +100,14 @@ public class Animal {
         this.name = name;
     }
 
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
@@ -104,6 +116,7 @@ public class Animal {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", descr='" + descr + '\'' +
+                ", dob=" + dob +
                 ", inShelterFrom=" + inShelterFrom +
                 '}';
     }
