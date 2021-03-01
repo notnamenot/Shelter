@@ -33,4 +33,11 @@ public class AnimalController {
         animalService.deleteAnimal(animalId);
     }
 
+    @PutMapping(path = "{animalId}")
+    public void updateAnimal(@PathVariable("animalId") Long animalId,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) String descr) {
+        animalService.updateAnimal(animalId, name, descr);
+    }
+
 }
