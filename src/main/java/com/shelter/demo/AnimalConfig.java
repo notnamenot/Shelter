@@ -1,5 +1,8 @@
-package com.shelter.demo.animal;
+package com.shelter.demo;
 
+import com.shelter.demo.model.AnimalType;
+import com.shelter.demo.repo.AnimalRepository;
+import com.shelter.demo.model.Animal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

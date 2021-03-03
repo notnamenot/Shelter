@@ -1,4 +1,4 @@
-package com.shelter.demo.animal;
+package com.shelter.demo.model;
 
 public enum AnimalType {
     DOG, CAT, RABBIT, HAMSTER

@@ -1,12 +1,13 @@
-package com.shelter.demo.animal;
+package com.shelter.demo.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
 @Entity // for hibernate
 @Table
-public class Animal {
+public class Animal implements Serializable {
 
     @Id
     @SequenceGenerator(
@@ -18,6 +19,7 @@ public class Animal {
             strategy = GenerationType.SEQUENCE,
             generator = "animal_sequence"
     )
+    @Column(nullable = false, updatable = false)
     private Long id;
     @Enumerated(EnumType.STRING)
     private AnimalType animalType;
