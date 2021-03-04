@@ -47,20 +47,39 @@ public class AnimalService {
         animalRepository.deleteById(animalId);
     }
 
-    @Transactional // entity goes into managed state
-    public Animal updateAnimal(Long animalId, String name, String descr) {
-        Animal animal = animalRepository.findById(animalId)
-                .orElseThrow(() -> new AnimalNotFoundException(animalId));
+//    @Transactional // entity goes into managed state
+//    public Animal updateAnimal(Long animalId, String name, String descr) {
+//        Animal animal = animalRepository.findById(animalId)
+//                .orElseThrow(() -> new AnimalNotFoundException(animalId));
+//
+//        if (descr != null && descr.length() > 0 && !Objects.equals(descr, animal.getDescr())) {
+//            animal.setDescr(descr);
+//        }
+//        if (name != null && name.length() > 0 && !Objects.equals(name, animal.getName())) {
+//            if (animalRepository.findAnimalByName(name).isPresent()) {
+//               throw new IllegalStateException("Name taken!");
+//            }
+//            animal.setName(name);
+//        }
+//        return animal;
+//    }
 
-        if (descr != null && descr.length() > 0 && !Objects.equals(descr, animal.getDescr())) {
-            animal.setDescr(descr);
+    @Transactional // entity goes into managed state
+    public Animal updateAnimal(Animal updatedAnimal) {
+        Animal animal = animalRepository.findById(updatedAnimal.getId())
+                .orElseThrow(() -> new AnimalNotFoundException(updatedAnimal.getId()));
+
+        if (animal.getDescr() != null && animal.getDescr().length() > 0 && !Objects.equals(updatedAnimal.getDescr(), animal.getDescr())) {
+            animal.setDescr(updatedAnimal.getDescr());
         }
-        if (name != null && name.length() > 0 && !Objects.equals(name, animal.getName())) {
-            if (animalRepository.findAnimalByName(name).isPresent()) {
-               throw new IllegalStateException("Name taken!");
+
+        if (updatedAnimal.getName() != null && updatedAnimal.getName().length() > 0 && !Objects.equals(updatedAnimal.getName(), animal.getName())) {
+            if (animalRepository.findAnimalByName(updatedAnimal.getName()).isPresent()) {
+                throw new IllegalStateException("Name taken!");
             }
-            animal.setName(name);
+            animal.setName(updatedAnimal.getName());
         }
+
         return animal;
     }
 }

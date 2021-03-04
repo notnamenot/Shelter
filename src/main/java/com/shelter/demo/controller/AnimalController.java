@@ -42,16 +42,23 @@ public class AnimalController {
     }
 
     @DeleteMapping(path = "{animalId}")
-    public void deleteAnimal(@PathVariable("animalId") Long animalId ){
+    public ResponseEntity<?> deleteAnimal(@PathVariable("animalId") Long animalId ){
         animalService.deleteAnimal(animalId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(path = "{animalId}") // TODO update with @RequestBody?
-    public ResponseEntity<Animal> updateAnimal(@PathVariable("animalId") Long animalId,
-                             @RequestParam(required = false) String name,
-                             @RequestParam(required = false) String descr) {
-        Animal animal = animalService.updateAnimal(animalId, name, descr);
-        return new ResponseEntity<>(animal, HttpStatus.OK);
+//    @PutMapping(path = "{animalId}") // RequestParams should be used to filter
+//    public ResponseEntity<Animal> updateAnimal(@PathVariable("animalId") Long animalId,
+//                             @RequestParam(required = false) String name,
+//                             @RequestParam(required = false) String descr) {
+//        Animal animal = animalService.updateAnimal(animalId, name, descr);
+//        return new ResponseEntity<>(animal, HttpStatus.OK);
+//    }
+
+    @PutMapping(path = "{animalId}")
+    public ResponseEntity<Animal> updateAnimal(@PathVariable String animalId, @RequestBody Animal animal) {
+        Animal updatedAnimal = animalService.updateAnimal(animal);
+        return new ResponseEntity<>(updatedAnimal, HttpStatus.OK);
     }
 
 }
