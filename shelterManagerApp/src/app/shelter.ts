@@ -4,6 +4,6 @@ export interface Animal {
     animalType: string;
     age: number;
     descr: string;
-    dob: string;
-    inShelterFrom:string;
+    dob: Date;
+    inShelterFrom: Date;
 }

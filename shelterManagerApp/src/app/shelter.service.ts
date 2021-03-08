@@ -21,7 +21,7 @@ export class ShelterService{
     }
 
     public updateAnimal(animal: Animal): Observable<Animal> {
-        return this.http.post<Animal>(`${this.apiServerUrl}/animals/${animal.id}`, animal);
+        return this.http.put<Animal>(`${this.apiServerUrl}/animals/${animal.id}`, animal);
     }
 
     public deleteAnimal(animalId: number): Observable<void> {
